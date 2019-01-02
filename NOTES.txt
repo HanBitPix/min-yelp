@@ -1,0 +1,2 @@
+Have created dev and producation environment
+two different database / google api for testing and producation
