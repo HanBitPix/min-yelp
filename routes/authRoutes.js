@@ -1,6 +1,7 @@
 'use strict';
 
 const passport = require('passport');
+const keys = require('../config/keys');
 
 module.exports = (app) => {
   app.get(
@@ -10,11 +11,17 @@ module.exports = (app) => {
     })
   );
 
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  app.get(
+    '/auth/google/callback', 
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('/dashboard');
+    }
+  );
 
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect('/');
   });
 
   app.get('/api/current_user', (req, res) => {

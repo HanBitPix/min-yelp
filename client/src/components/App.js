@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import * as actions from '../actions';
+import './App.css';
 
 import Header from './Header';
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyNew = () => <h2>SurveyNew</h2>;
-const Landing = () => <h2>Landing</h2>;
+import Landing from './Landing';
+import Dashboard from '../containers/Dashboard';
+import Business from '../containers/Business';
 
 class App extends Component {
   componentDidMount(){
@@ -19,8 +20,14 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Header />
-            <Route exact path="/" component={Landing} />
-            <Route path="/surveys" component={Dashboard} />
+            <div className="container">
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route 
+                path="/dashboard/:productid"
+                render={(props) => <Business {...props}/>}
+              />
+            </div>
           </div>
         </BrowserRouter>
       </div>
